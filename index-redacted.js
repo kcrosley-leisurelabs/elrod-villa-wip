@@ -9,7 +9,7 @@
 
 const Alexa = require('alexa-sdk');
 
-// const APP_ID = 'amzn1.ask.skill.whatever';  // TODO replace with your app ID (OPTIONAL).
+const APP_ID = undefined;  // TODO replace with your app ID (OPTIONAL).
 
 // INFORMATION AND DIALOG PROMPTS
 
