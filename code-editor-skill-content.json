@@ -201,14 +201,11 @@
       "samples": [
         "I need contact info",
         "I need contact information",
-        "how do I call Keith",
-        "how do I call Jill",
-        "what is Keith's phone number",
-        "what is Jill's phone number",
-        "I lost Keith's phone number",
-        "I need to call Keith",
-        "I need to call Jill",
-        "who do we contact"
+        "who do we contact",
+        "I need to call the owner",
+        "I need to call OwnerName",
+        "I lost OwnerName's phone number",
+        "how do I call OwnerName"
       ],
       "slots": []
     },
@@ -715,7 +712,6 @@
             "value": "gay",
             "synonyms": [
               "homosexual",
-              "homo",
               "drag"
             ]
           }
@@ -774,7 +770,8 @@
               "burgers",
               "fries",
               "french fries",
-              "fried"
+              "fried",
+              "drivethrough"
             ]
           }
         },
@@ -823,7 +820,8 @@
             "synonyms": [
               "italy",
               "spaghetti",
-              "lasagne"
+              "lasagne",
+              "pasta"
             ]
           }
         },
