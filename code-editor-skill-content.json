@@ -1,0 +1,951 @@
+{
+  "intents": [
+    {
+      "name": "AMAZON.CancelIntent",
+      "samples": []
+    },
+    {
+      "name": "AMAZON.HelpIntent",
+      "samples": []
+    },
+    {
+      "name": "AMAZON.StopIntent",
+      "samples": []
+    },
+    {
+      "name": "AshtrayIntent",
+      "samples": [
+        "I need a smoke",
+        "can we smoke here",
+        "where can we smoke",
+        "I need a cigarette",
+        "I can't find the ashtray",
+        "I can't find an ashtray",
+        "where can I find an ashtray",
+        "I need an ashtray",
+        "is there an ashtray",
+        "where do you keep the ashtray",
+        "do you have ashtrays",
+        "I like smoking",
+        "I'm going to have a cigarette",
+        "I'm going out for a smoke"
+      ],
+      "slots": []
+    },
+    {
+      "name": "AttractionsIntent",
+      "samples": [
+        "what's there to do around here",
+        "what is there to do around here",
+        "local attractions",
+        "things to do",
+        "tell me about local attractions",
+        "tell us about local attractions",
+        "tell me about things to do",
+        "tell us about things to do",
+        "can you tell me about tourist attractions",
+        "what are the local tourist attractions",
+        "are there any {LocalAttractions} around here",
+        "I'm bored",
+        "we're bored",
+        "I am bored",
+        "we are bored",
+        "tell us about tourist attractions",
+        "I want to know about {LocalAttractions}",
+        "I want to know about local attractions",
+        "what's this {LocalAttractions} thing"
+      ],
+      "slots": [
+        {
+          "name": "LocalAttractions",
+          "type": "attractionTypes",
+          "samples": [
+            "tell me about {LocalAttractions}",
+            "{LocalAttractions}",
+            "the {LocalAttractions}",
+            "tell me about the {LocalAttractions}",
+            "tell us about the {LocalAttractions}",
+            "{LocalAttractions} please"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "BarsIntent",
+      "samples": [
+        "I'm thirsty",
+        "We're thirsty",
+        "I need a drink",
+        "we need a drink",
+        "bars and nightlife",
+        "can you recommend any bars",
+        "can you recommend any nightclubs",
+        "where can we go out tonight",
+        "where can I go out tonight",
+        "where can I get a cocktail",
+        "I need a cocktail",
+        "{BarType} bar",
+        "recommend a {BarType} bar",
+        "I want to go to a {BarType} bar",
+        "I want to go to a {BarType} club",
+        "nightlife recommendation",
+        "nightlife recommendations",
+        "where's the nearest {BarType} bar",
+        "what {BarType} bars do you recommend",
+        "where can I find a {BarType} bar",
+        "where can we find a {BarType} bar",
+        "bars",
+        "nightlife",
+        "nightclub",
+        "nightclubs",
+        "recommend a drinking establishment",
+        "drinking establishments",
+        "we want adult beverages",
+        "mommy needs a drink",
+        "daddy needs a drink",
+        "I want to get drunk",
+        "we want to get drunk",
+        "bar recommendations",
+        "recommend a bar",
+        "tell me about {BarType} bars",
+        "give me a {BarType} bar",
+        "can you tell me about {BarType} bars",
+        "daddy needs a cocktail",
+        "mommy needs a cocktail",
+        "it's happy hour",
+        "where can we go for happy hour",
+        "is it too early to drink",
+        "is it too early to get drunk",
+        "where is there a {BarType} bar",
+        "where's the best {BarType} bar",
+        "{BarType} bars"
+      ],
+      "slots": [
+        {
+          "name": "BarType",
+          "type": "barTypes",
+          "samples": [
+            "I'm interested in {BarType} bars",
+            "We're interested in {BarType} bars",
+            "{BarType} bars",
+            "{BarType} bar",
+            "bars with {BarType}",
+            "how about {BarType} bars",
+            "how about a {BarType} bar",
+            "tell me about bars with {BarType}",
+            "tell us about bars with {BarType}"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "CheckoutIntent",
+      "samples": [
+        "tell me about checkout",
+        "tell me about checking out",
+        "what do we need to do to check out",
+        "it's time for us to go",
+        "what do we do before we leave",
+        "checkout instructions",
+        "how do I check out",
+        "tell us about checkout"
+      ],
+      "slots": []
+    },
+    {
+      "name": "ClimateControlIntent",
+      "samples": [
+        "tell me about climate control",
+        "how do I turn on the air conditioning",
+        "how do I turn on the heat",
+        "how do I adjust the temperature",
+        "where is the thermostat",
+        "it's too hot",
+        "it's too cold",
+        "is there a nest",
+        "is there a nest thermostat",
+        "where is the other thermostat",
+        "where are the thermostats located",
+        "how do we cool it down",
+        "how do we make it warmer",
+        "can I adjust the temperature",
+        "how do we adjust the temperature"
+      ],
+      "slots": []
+    },
+    {
+      "name": "CoffeeIntent",
+      "samples": [
+        "is there a coffee maker",
+        "is there a tea kettle",
+        "where is the coffee",
+        "how do I use the coffee maker",
+        "do we need coffee filters",
+        "coffee maker",
+        "where is the tea kettle",
+        "where do I find a coffee maker",
+        "is there coffee creamer",
+        "where can I find splenda",
+        "where is the coffee creamer",
+        "I need coffee",
+        "we need coffee",
+        "I can't find a tea kettle",
+        "is there a coffeemaker",
+        "coffeemaker",
+        "how do i use teh coffeemaker"
+      ],
+      "slots": []
+    },
+    {
+      "name": "ContactInfoIntent",
+      "samples": [
+        "I need contact info",
+        "I need contact information",
+        "how do I call Keith",
+        "how do I call Jill",
+        "what is Keith's phone number",
+        "what is Jill's phone number",
+        "I lost Keith's phone number",
+        "I need to call Keith",
+        "I need to call Jill",
+        "who do we contact"
+      ],
+      "slots": []
+    },
+    {
+      "name": "DishwasherIntent",
+      "samples": [
+        "where is the dishwasher",
+        "I can't find the dishwasher",
+        "we can't find the dishwasher",
+        "is there a dishwasher",
+        "how do I find the dishwasher",
+        "the dishwasher says add salt",
+        "what does add salt mean",
+        "the add salt light is on",
+        "how do I start the dishwasher",
+        "how does the dishwasher work",
+        "tell me about the dishwasher",
+        "we need to wash the dishes",
+        "it's time to wash the dishes",
+        "I hate doing dishes",
+        "is the dishwasher hidden"
+      ],
+      "slots": []
+    },
+    {
+      "name": "EightBallIntent",
+      "samples": [
+        "Magic eight ball",
+        "Tell me the future",
+        "Do you have a magic eight ball",
+        "do the magic eight ball thing",
+        "what about a magic eight ball"
+      ],
+      "slots": []
+    },
+    {
+      "name": "ElectronicsIntent",
+      "samples": [
+        "what sort of electronics",
+        "tell me about the electronics",
+        "I need help with electronics",
+        "who do I work the electronic stuff",
+        "what type of electronics can you tell me about",
+        "the electronics are complicated"
+      ],
+      "slots": []
+    },
+    {
+      "name": "EmergencyIntent",
+      "samples": [
+        "tell me about emergency procedures",
+        "what if there is an emergency",
+        "I need the emergency number",
+        "emergency number",
+        "there's an emergency",
+        "there's been an emergency",
+        "I have an emergency",
+        "emergency contact number",
+        "we need urgent help",
+        "how do I contact police",
+        "how do I contact the fire department",
+        "how do I get emergency medical attention"
+      ],
+      "slots": []
+    },
+    {
+      "name": "FireplaceIntent",
+      "samples": [
+        "how do I light the fireplace",
+        "how do we light the fireplace",
+        "fireplace",
+        "tell me about the fireplace",
+        "can we use the fireplace",
+        "is the fireplace gas or wood",
+        "does the fireplace use gas",
+        "does the fireplace have a flue",
+        "does the chimney work"
+      ],
+      "slots": []
+    },
+    {
+      "name": "FirstAidIntent",
+      "samples": [
+        "is there a first aid kit",
+        "we need a bandage",
+        "first aid kit",
+        "where is the first aid kit",
+        "are there bandages",
+        "are their first aid supplies",
+        "where is there neosporin",
+        "is there any burn cream",
+        "I've got an owie",
+        "ouch",
+        "damn this hurts",
+        "i hurt myself",
+        "someone has been hurt",
+        "are there antibiotics",
+        "is there any aspirin",
+        "I need a bandaid",
+        "I need a band aid",
+        "I need iburporfen",
+        "I need painkillers",
+        "where can I find ibuprofen",
+        "I need an aspirin",
+        "where's the aspirin"
+      ],
+      "slots": []
+    },
+    {
+      "name": "GrillingIntent",
+      "samples": [
+        "where is the barbeque",
+        "where is the grill",
+        "is there a barbecue grill",
+        "how do I light the grill",
+        "how do we light the grill",
+        "we want to use the grill",
+        "I want to use the barbeque ",
+        "how do we use the barbecue",
+        "does the grill need propane",
+        "does the grill need gas",
+        "is the barbecue gas",
+        "we're going to grill",
+        "how do I light the barbecue",
+        "how do I start the barbecue",
+        "how do I start the grill",
+        "how do I light the barbecue grill"
+      ],
+      "slots": []
+    },
+    {
+      "name": "HistoryIntent",
+      "samples": [
+        "history",
+        "tell me about history",
+        "what's the history of this place",
+        "what's the history of elrod villa",
+        "history of elrod villa",
+        "when was the house built",
+        "how old is this house",
+        "how old is the villa",
+        "when was elrod villa built",
+        "who built this place",
+        "how old is this place",
+        "tell me the history of this place",
+        "who built this house",
+        "who designed this house",
+        "who designed elrod villa",
+        "who was the owner of this house",
+        "is this house famous",
+        "who made this thing",
+        "who in the world designed this place",
+        "who made this house",
+        "who made elrod villa",
+        "who designed the house",
+        "elrod villa history"
+      ],
+      "slots": []
+    },
+    {
+      "name": "HospitalIntent",
+      "samples": [
+        "Where is the nearest hospital",
+        "I need a doctor",
+        "we have a medical emergency",
+        "where is the hospital",
+        "where is the emergency room",
+        "where can I find an emergency room",
+        "directions to the hospital",
+        "is there an emergency room nearby",
+        "where can I find a doctor",
+        "I need a hospital",
+        "we need a hospital",
+        "hospital",
+        "desert regional medical center",
+        "where is a medical center",
+        "we need a medical center"
+      ],
+      "slots": []
+    },
+    {
+      "name": "LaundryIntent",
+      "samples": [
+        "is there a washing machine",
+        "where is the washing machine",
+        "is there a washer drier",
+        "where is the washer drier",
+        "where do I find the laundy",
+        "can we use the laundry",
+        "where is the laundry room",
+        "I can't find the washing machine",
+        "I can't find the clothes drier",
+        "tell me about the washing machine",
+        "tell me about the laundry",
+        "I need to wash the clothes",
+        "do we need to wash the towels",
+        "I need to do laundry",
+        "washing machine",
+        "washer drier",
+        "laundry room"
+      ],
+      "slots": []
+    },
+    {
+      "name": "MaintenanceIntent",
+      "samples": [
+        "I think something is broken",
+        "I have a maintenance question",
+        "I need to ask about repairing something",
+        "something needs repairs",
+        "when does the pool get serviced",
+        "when does the gardener come",
+        "are workers supposed to be here",
+        "when does the pool get cleaned",
+        "when does the pool guy come",
+        "when does the gardener arrive",
+        "when does the pool man arrive",
+        "what days does the pool get cleaned",
+        "when will the pool be cleaned",
+        "when will the gardener come",
+        "do you have a gardener",
+        "do you have a pool service"
+      ],
+      "slots": []
+    },
+    {
+      "name": "MicrowaveIntent",
+      "samples": [
+        "where is the microwave",
+        "where is the microwave oven",
+        "microwave oven",
+        "I can't find a microwave",
+        "we can't find the microwave",
+        "where is the microwave hidden",
+        "tell me about the microwave",
+        "where do we find the microwave"
+      ],
+      "slots": []
+    },
+    {
+      "name": "PhoneIntent",
+      "samples": [
+        "is there a phone in the house",
+        "where is the telephone",
+        "how do I find the telephone",
+        "I need to find a phone",
+        "I need to find a telephone",
+        "I can't find the telephone",
+        "where's the phone",
+        "what is the phone number here",
+        "is there a house phone",
+        "can I use the telephone",
+        "can we use the phone",
+        "what's our telephone number"
+      ],
+      "slots": []
+    },
+    {
+      "name": "ReedIntent",
+      "samples": [
+        "what is reed's phone number",
+        "how do I contact reed",
+        "who is the property manager",
+        "how do I reach reed",
+        "how do I call reed",
+        "I want to call reed",
+        "reed",
+        "reed gaudette",
+        "mister reed",
+        "I need reed's phone number",
+        "I need to call reed",
+        "how do I call the property manager",
+        "how do I get hold of reed",
+        "tell me about reed",
+        "what is reed gaudette's phone number",
+        "who is reed",
+        "who is reed gaudette"
+      ],
+      "slots": []
+    },
+    {
+      "name": "RefrigeratorIntent",
+      "samples": [
+        "tell me about the refrigerator",
+        "tell me about the fridge",
+        "is there an icemaker",
+        "is there an ice maker",
+        "the ice maker isn't working",
+        "the ice maker is broken",
+        "we need more ice",
+        "where can I get ice",
+        "where can we buy ice",
+        "where do I find the ice",
+        "do we need to buy ice",
+        "does the icemaker work"
+      ],
+      "slots": []
+    },
+    {
+      "name": "RestaurantsIntent",
+      "samples": [
+        "what restaurants do you recommend",
+        "restaurant reccomenations",
+        "what are your favorite restaurants",
+        "where can we eat around here",
+        "where can I get a bite to eat",
+        "recommend some restaurants to me",
+        "recommend some local eateries",
+        "can you recommend a restaurant to us",
+        "where can we get {FoodType} food",
+        "what is the best {FoodType} restaurant",
+        "what {FoodType} restaurants do you recommend",
+        "{FoodType} food",
+        "{FoodType} restaurant",
+        "I'm looking for a {FoodType} joint",
+        "I'm looking for a {FoodType} restaurant",
+        "recommend a {FoodType} restaurant",
+        "are there any {FoodType} restaurants near here",
+        "I need {FoodType} food",
+        "I want {FoodType} food",
+        "where can we find {FoodType} food",
+        "can you recommend a {FoodType} restaurant",
+        "recommend a restaurant",
+        "where can we eat",
+        "where is there to eat",
+        "local {FoodType} restaurants",
+        "{FoodType} restaurants",
+        "I'm hungry",
+        "we're hungry",
+        "I am hungry",
+        "we are hungry",
+        "I'm starving",
+        "I want to go out to eat",
+        "we want to go out to eat",
+        "give me a restaurant recommendation",
+        "give us a restaurant recommendation",
+        "tell me about a {FoodType} restaurant",
+        "tell be about {FoodType} restaurants",
+        "where's the best {FoodType} joint",
+        "where is the best {FoodType} restaurant",
+        "{FoodType} places",
+        "must have {FoodType} food"
+      ],
+      "slots": [
+        {
+          "name": "FoodType",
+          "type": "Cuisine",
+          "samples": [
+            "{FoodType} food",
+            "{FoodType} restaurants",
+            "I want to know about {FoodType} joints",
+            "I'm hungry for {FoodType} food",
+            "I want a {FoodType} restaurant",
+            "Give me {FoodType}"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "TopicsIntent",
+      "samples": [
+        "what topics can you tell me about",
+        "list topics",
+        "what types of questions can you answer",
+        "what categories can you tell me about",
+        "what sort of questions can you answer",
+        "what kind of questions",
+        "main menu",
+        "what topics can you talk about",
+        "what questions can you answer"
+      ],
+      "slots": []
+    },
+    {
+      "name": "TrashIntent",
+      "samples": [
+        "where is the trash",
+        "where do I find the trash",
+        "where is the garbage",
+        "where do I find the garbage",
+        "where is the recycling",
+        "how do I take out the trash",
+        "where do we take out the garbage",
+        "where do we put the trash",
+        "where do we put the garbage",
+        "where do we put the recycling",
+        "where are the trash cans",
+        "where are the trash bins",
+        "where is the recycling bin",
+        "i can't find the trash",
+        "i can't find the recycling"
+      ],
+      "slots": []
+    },
+    {
+      "name": "VRBOIntent",
+      "samples": [
+        "what do you know about VRBO",
+        "what do you know about HomeAway",
+        "what's the deal with verbo",
+        "what's the deal with homeaway",
+        "should we book Elrod Villa on verbo or homeaway",
+        "should we book Elrod Villa on VRBO or homeaway",
+        "tell me what you know about verbo",
+        "tell me what you know about homeaway",
+        "what do you think about verbo",
+        "what do you think about homeaway",
+        "have you heard the news about VRBO",
+        "have you heard the news about verbo",
+        "have you heard the news about homeaway"
+      ],
+      "slots": []
+    },
+    {
+      "name": "WiFiIntent",
+      "samples": [
+        "what is the wifi password",
+        "what is the wifi network",
+        "how do i get on the network",
+        "is there a password for the wifi",
+        "what is the network password",
+        "how do i connect to the internet",
+        "how do i connect to the network",
+        "is there a wireless network",
+        "is there a wifi network",
+        "what is the wireless network",
+        "what is the wireless password"
+      ],
+      "slots": []
+    }
+  ],
+  "types": [
+    {
+      "name": "attractionTypes",
+      "values": [
+        {
+          "id": "museumsAttraction",
+          "name": {
+            "value": "museums",
+            "synonyms": [
+              "museum",
+              "art",
+              "sculpture",
+              "gallery",
+              "galleries"
+            ]
+          }
+        },
+        {
+          "id": "villagefestAttraction",
+          "name": {
+            "value": "village fest",
+            "synonyms": [
+              "fest",
+              "festival",
+              "street fair",
+              "fair",
+              "village"
+            ]
+          }
+        },
+        {
+          "id": "aerialtramwayAttraction",
+          "name": {
+            "value": "aerial tramway",
+            "synonyms": [
+              "tram",
+              "tramway",
+              "trams"
+            ]
+          }
+        },
+        {
+          "id": "walkofstarsAttraction",
+          "name": {
+            "value": "walk of stars",
+            "synonyms": [
+              "walk",
+              "walkway",
+              "stars",
+              "star walk"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "barTypes",
+      "values": [
+        {
+          "id": "diveBar",
+          "name": {
+            "value": "dive",
+            "synonyms": [
+              "cheap",
+              "inexpensive",
+              "casual"
+            ]
+          }
+        },
+        {
+          "id": "gayBar",
+          "name": {
+            "value": "gay",
+            "synonyms": [
+              "homosexual",
+              "homo",
+              "drag"
+            ]
+          }
+        },
+        {
+          "id": "upscaleBar",
+          "name": {
+            "value": "upscale",
+            "synonyms": [
+              "fancy",
+              "pricey",
+              "expensive",
+              "formal"
+            ]
+          }
+        },
+        {
+          "id": "tikiBar",
+          "name": {
+            "value": "tiki",
+            "synonyms": [
+              "retro"
+            ]
+          }
+        },
+        {
+          "id": "patioBar",
+          "name": {
+            "value": "patio",
+            "synonyms": [
+              "outside",
+              "outoor",
+              "outdoors",
+              "umbrella"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "Cuisine",
+      "values": [
+        {
+          "id": "fastfoodCuisine",
+          "name": {
+            "value": "fast food",
+            "synonyms": [
+              "fast casual",
+              "drive through",
+              "greasy",
+              "quick",
+              "fast",
+              "hamburger",
+              "hamburgers",
+              "burger",
+              "burgers",
+              "fries",
+              "french fries",
+              "fried"
+            ]
+          }
+        },
+        {
+          "id": "mexicanCuisine",
+          "name": {
+            "value": "mexican",
+            "synonyms": [
+              "burrito",
+              "taco",
+              "enchilada",
+              "mexicano",
+              "mexico"
+            ]
+          }
+        },
+        {
+          "id": "chineseCuisine",
+          "name": {
+            "value": "chinese",
+            "synonyms": [
+              "oriental",
+              "asian",
+              "chow mein",
+              "fried rice"
+            ]
+          }
+        },
+        {
+          "id": "pizzaCuisine",
+          "name": {
+            "value": "pizza",
+            "synonyms": [
+              "pie",
+              "flatbread",
+              "pizza pie",
+              "pepperoni",
+              "deep dish"
+            ]
+          }
+        },
+        {
+          "id": "italianCuisine",
+          "name": {
+            "value": "italian",
+            "synonyms": [
+              "italy",
+              "spaghetti",
+              "lasagne"
+            ]
+          }
+        },
+        {
+          "id": "steakhouseCuisine",
+          "name": {
+            "value": "steakhouse",
+            "synonyms": [
+              "steak",
+              "meat",
+              "prime rib"
+            ]
+          }
+        },
+        {
+          "id": "brunchCuisine",
+          "name": {
+            "value": "brunch",
+            "synonyms": [
+              "breakfast",
+              "eggs",
+              "bacon"
+            ]
+          }
+        }
+      ]
+    }
+  ],
+  "prompts": [
+    {
+      "id": "Elicit.Intent-AttractionsIntent.IntentSlot-LocalAttractions",
+      "promptVersion": "1.0",
+      "definitionVersion": "1.0",
+      "variations": [
+        {
+          "type": "PlainText",
+          "value": "I can tell you about a variety of local attractions including... museums, Village Fest, the aerial tramway and the walk of stars. Tell me what you're interested in."
+        }
+      ]
+    },
+    {
+      "id": "Elicit.Intent-BarsIntent.IntentSlot-BarType",
+      "promptVersion": "1.0",
+      "definitionVersion": "1.0",
+      "variations": [
+        {
+          "type": "PlainText",
+          "value": "I have recommendations for bars with patios, tiki bars, upscale bars, gay bars, and... my favorite... dive bars. Tell me what you're interested in."
+        }
+      ]
+    },
+    {
+      "id": "Elicit.Intent-RestaurantsIntent.IntentSlot-FoodType",
+      "promptVersion": "1.0",
+      "definitionVersion": "1.0",
+      "variations": [
+        {
+          "type": "PlainText",
+          "value": "What type of restaurant are you looking for?"
+        },
+        {
+          "type": "PlainText",
+          "value": "Is there any particular type of food you're hungry for?"
+        },
+        {
+          "type": "PlainText",
+          "value": "I can recommend Brunch, Steakhouse, Italian, Pizza, Chinese, Mexican, and Fast Food restaurants. Which are you interested in?"
+        }
+      ]
+    }
+  ],
+  "dialog": {
+    "version": "1.0",
+    "intents": [
+      {
+        "name": "AttractionsIntent",
+        "confirmationRequired": false,
+        "prompts": {},
+        "slots": [
+          {
+            "name": "LocalAttractions",
+            "type": "attractionTypes",
+            "elicitationRequired": true,
+            "confirmationRequired": false,
+            "prompts": {
+              "elicit": "Elicit.Intent-AttractionsIntent.IntentSlot-LocalAttractions"
+            }
+          }
+        ]
+      },
+      {
+        "name": "BarsIntent",
+        "confirmationRequired": false,
+        "prompts": {},
+        "slots": [
+          {
+            "name": "BarType",
+            "type": "barTypes",
+            "elicitationRequired": true,
+            "confirmationRequired": false,
+            "prompts": {
+              "elicit": "Elicit.Intent-BarsIntent.IntentSlot-BarType"
+            }
+          }
+        ]
+      },
+      {
+        "name": "RestaurantsIntent",
+        "confirmationRequired": false,
+        "prompts": {},
+        "slots": [
+          {
+            "name": "FoodType",
+            "type": "Cuisine",
+            "elicitationRequired": true,
+            "confirmationRequired": false,
+            "prompts": {
+              "elicit": "Elicit.Intent-RestaurantsIntent.IntentSlot-FoodType"
+            }
+          }
+        ]
+      }
+    ]
+  }
+}
