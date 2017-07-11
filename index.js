@@ -1,7 +1,10 @@
 /* eslint-disable  func-names */
 /* eslint quote-props: ["error", "consistent"]*/
 /**
- * This skill implements a vacation rental chatbot for Elrod Villa Palm Springs.
+ * This skill implements a vacation rental chatbot. The content here is mostly customized for
+ * my Palm Springs vacation rental known as "Elrod Villa" (http://www.evillapalmsprings.com).
+ * You would, of course, customize this to relay information about your own rental by modifying
+ * the various constants below.
  * 
  **/
 
@@ -9,28 +12,31 @@
 
 const Alexa = require('alexa-sdk');
 
-const APP_ID = 'amzn1.ask.skill.7a547e03-c802-43ed-b590-921e014d7d81';  // TODO replace with your app ID (OPTIONAL).
+const APP_ID = undefined;  // TODO replace with your app ID (OPTIONAL).
 
-// INFORMATION AND DIALOG PROMPTS
+// INFORMATION AND DIALOG PROMPTS -- here is the text Alexa reads for each of the "single turn" dialog intents
+// [something]Answer is the text read for [Something]Intent
+// Note that this is not done algorithmically in this example -- there are specific handlers for each specific intent
+// Note also that some of these demonstrate the use of SSML to control how Alexa speaks difficult parts
 
-// TrashIntent
+const rentalName = "My Groovy Vacation Rental";
+
 const trashAnswer = "Trash and recycling bins are located at the northwest corner of the club condominiums \
 <w role='amazon:NN'>complex</w>.";
 
-const wifiAnswer = "Our WiFi network is called Elrod Villa. The password is leisure <break time='250ms'/> 1. \
-Thats the word leisure, followed by the numeral, one. Spelled, \
-<prosody rate='slow'>L, E, I, S, U, R, E, 1</prosody>";
+const wifiAnswer = "Our WiFi network is called Network Name. The password is sample. Spelled, \
+<prosody rate='slow'>S, A, M, P, L, E</prosody>";
 
-const reedAnswer = "Our property manager is Mr. Reed Gaudette. His mobile number is, 760-799-5509. \
+const reedAnswer = "Our property manager is Name. His mobile number is, mobile. \
 Contact him for any questions, concerns, or issues that may arise during your stay. \
-Feel free to call or text him at any time! His number again is <break time='500ms'/> 760-799-5509.";
+Feel free to call or text him at any time! His number again is <break time='500ms'/> mobile.";
 
 const checkoutAnswer = "Our check-out process is pretty simple and painless... \
 Remove all trash and recycling. Turn off Pool/Spa heater, pump, fountain and spa jets. \
 Close all sliding doors and lock them using security bars. Close all blinds. \
 Return Media Room remote to its charging cradle in the media cabinet. \
 Leave full set of keys in gate lockbox. \
-Please contact mister Reed on 760-799-5509 to advise him of your departure.";
+Please contact mister Reed on number to advise him of your departure.";
 
 const coffeeAnswer = "A 12-cup drip coffee maker can be found on the kitchen counter. \
 This coffee maker is equipped with a reusable gold filter. There is no need to use or add a paper filter, \
@@ -38,13 +44,12 @@ just add coffee to the gold one. <break time='500s'/>You can also find a French 
 in the cabinets to the left of the ovens. <break time='500s'/> There is usually coffee and various sweeteners and \
 creamers in the kitchen cabinet to your left, as you face the electric cooktop.";
 
-const contactinfoAnswer = "Our property manager, Mr. Reed Gaudette (mobile: 760-799-5509), is your first \
+const contactinfoAnswer = "Our property manager, Name (mobile: number), is your first \
 point of contact for any questions, concerns or issues that may arise during your stay. <break time='750ms'/> \
-Your hosts and offsite owner/managers are Keith Crosley (mobile: 415-412-4649) \
-and Jill Plemons (mobile: 415-577-0360).";
+Your host and offsite owner/manager is Namey (mobile: number).";
 
 const electronicsAnswer = "What space-age bachelor pad would be complete without \
-a hi-fi stereo system and futuristic control panels? The Elrod Villa has these in spades. \
+a hi-fi stereo system and futuristic control panels? " + rentalName + " has these in spades. \
 Whole-house audio is enabled by stereo speakers that are hidden within the built-in cabinets \
 in the Living Room, Media Room and Master Bedroom (leave the doors of these cabinets \
 open when enjoying the sound system).";
@@ -53,17 +58,17 @@ const airplayAnswer = "Here there should be instructions for using AirPlay and C
 
 const phoneAnswer = "There is a house telephone in the Master Bedroom. You will find it in the center cabinet \
 above the built-in desk console. \
-The number for this phone is: (760) 548-0135. Note that phone service is provided via \
+The number for this phone is: Number. Note that phone service is provided via \
 our local cable internet provider and, unlike a standard landline phone, \
 will not work if there is a power outage. Please use your mobile phone in the event of a power outage.";
 
 const emergencyAnswer = "The emergency number in the US is 911. \
 Use that number to summon police, fire or medical attention as needed. \
 Because emergency responders may not know your location, you will need to tell them that you are at: \
-130 West Racquet Club Road, unit #421, Palm Springs, California, 92262. \
+Address, City, State, Zipcode. \
 This is in the Club Condominiums complex near the intersection of Indian Canyon Road \
 and Racquet Club Road. Once your immediate emergency has been attended to, please inform \
-our property manager, Reed Gaudette (mobile: 760-799-5509), and the owners as soon as possible \
+our property manager and the owners as soon as possible \
 about the nature of your emergency.";
 
 const grillingAnswer = "There's a gas-powered BBQ grill in the pool and spa area. \
@@ -110,12 +115,12 @@ const firstAidAnswer = "A First Aid Kit is located in the kitchen cabinets above
 Other First Aid kits can be found in the Master Bathroom, in the drawers below the \
 Master Bathroom sinks.";
 
-const hospitalAnswer = "The closest hospital and emergency room is Desert Regional Medical Center, \
-Just one mile south of the villa at 1150 North Indian Canyon Drive. If you require immediate \
+const hospitalAnswer = "The closest hospital and emergency room is Hospital Namer, \
+Just one mile south of the villa at address. If you require immediate \
 medical attention, please dial 911 to request emergency medical services. <break time='250ms'/> \
-To drive to Desert Regional, turn left out of the Club Condominiums <w role='amazon:NN'>complex</w>, \
+To drive to Hospital Name, turn left out of the Club Condominiums <w role='amazon:NN'>complex</w>, \
 on to Racquet Club Road. Then turn right at the first light at Indian Canyon. Continue south for one mile. \
-You will see Desert Regional Medical Center on your left, past Vista Chino.";
+You will see Hospital Name on your left, past Vista Chino.";
 
 const refrigeratorAnswer = "The refrigerator has a built-in freezer with icemaker. \
 While the icemaker functions well enough, it doesn't make/store huge volumes of ice. \
@@ -136,7 +141,6 @@ const poolAnswer = "Pool service is performed on Tuesdays and Fridays, typically
 around naked by the pool in the morning, you'll probably want to be mindful of the regular \
 maintenance schedule. (Unless that's your thing. Not gonna judge.)";
 
-
 const maintenanceAnswer = "If you suspect a malfunction, experience a breakdown of some appliance, \
 or have some other maintenance issue, please contact our local property manager, Reed Gaudette. \
 Note that there are several regularly-scheduled maintenance tasks that happen on a weekly \
@@ -156,29 +160,38 @@ Broderick designed the original interior, custom cabinetry and even the sound sy
 <break time='2s'/> \
 Many of the villa's unique features, such as the travertine floors, were selected by Sig himself. \
 I'm told that Sig is responsible for having matched each piece of stone to ensure the grain matched all \
-throughout the house.<break time='2s'/> He was... a little bit particular about things.";
+throughout the house.<break time='1s'/> He was... a little bit particular about things.";
+
+// INFORMATION AND DIALOG PROMPTS -- here is the text Alexa reads for each of the "multi-turn" dialog intents
+// such as those for restaurants, bars and local attractions, or for things like first-time prompt and
+// reprompts. I've provided some alternative text for those that are selected at random. You'll note that some
+// hint at "Easter Eggs" such as a "Magic 8 Ball" game.
+// 
+// So, all of these are provided in an array of prompts.
 
 const prompts = {
+                // After starting the skill, we have a variety of prompts to get the chat going:
                 first: [
                 'What can I help you with?',
-                'Is there something about Elrod Villa I can help you with?',
+                'Is there something about ' + rentalName + ' I can help you with?',
                 'How may I help you?',
                 'Let me know how I can help you. Just ask.',
                 'I\'m sure you have many questions... Let me help you out with that.',
-                'I\'m no magic eight ball, but I can answer many common questions about the villa.',
-                'Questions about Elrod Villa? I may have answers.',
-                'Is there something about Elrod Villa that I can help you with?',
+                'I\'m no magic eightball, but I can answer many common questions about the villa.',
+                'Questions about ' + rentalName + '? I may have answers.',
+                'Is there something about ' + rentalName + ' that I can help you with?',
                 'Like the man said... <prosody pitch="+10%">ask</prosody> <prosody pitch="-25%" rate="slow">meee</prosody>, <prosody pitch="+10%">ask</prosody> <prosody pitch="-25%">me</prosody>, <prosody pitch="+10%">ask</prosody> <prosody rate="slow" pitch="-20%">meeeee...</prosody> I\'ll answer as best I can.'
                 ],
+                // For further variety, future reprompts also have some different options that we can randomize
                 second: [
                 'Is there more that I can help you with?',
-                'Is there something more about Elrod Villa I can help you with?',
+                'Is there something more about ' + rentalName + ' I can help you with?',
                 'How may I help you more?',
                 'Let me know if there"s anything else I can help you with.',
                 'I\'m sure you have many more questions... Let me help you out with that.',
                 'I\'m no magic eight-ball, but I can answer more common questions about the villa, if you need.',
-                'Do you have more questions about Elrod Villa? I may have more answers.',
-                'Is there something else about Elrod Villa that I can help you with?',
+                'Do you have more questions about ' + rentalName + '? I may have more answers.',
+                'Is there something else about ' + rentalName + ' that I can help you with?',
                 'Like the man said... ask me, ask me, ask me... I\'ll answer as best I can.',
                 'More questions? Ask me about anything... except secrets...',
                 'Have more questions? Ask away.',
@@ -186,6 +199,7 @@ const prompts = {
                 'There are few questions that I cannot answer. I\'m not allowed to answer questions about mysteries, however.',
                 'More questions? Ask me more.'
                 ], 
+                // Used in the Magic Eight Ball easter egg:
                 playAlong: [
                 'OK, I\'ll play along...',
                 'Ready for this?...',
@@ -230,6 +244,7 @@ const prompts = {
                 'Yes, definitely',
                 'You may rely on it.'
                 ],
+                // Here is a list of example topics that are used when the user requests help
                 topics: [
                 'WiFi',
                 'trash and recycling',
@@ -238,12 +253,15 @@ const prompts = {
                 'bars and nightlife',
                 'local attractions',
                 'check-out procedures',
-                'the history of Elrod Villa',
+                'the history of ' + rentalName,
                 'and much more',
                 'Don\'t be afraid to ask me specific questions such as, where\'s the dishwasher?',
                 'I\'m designed to be extremely conversational',
                 'As they say on Reddit, ask me anything!'
                 ],
+                // Now we're in multi-turn dialog land. Here is where we set up handling for responding to
+                // requests for restaurant recommendations. The cuisines correspond to the Cuisine Slot Type 
+                // values defined in the custom Slot Types section of the Skill Builder:
                 cuisines: [
                 'brunch',
                 'fine dining',
@@ -254,6 +272,8 @@ const prompts = {
                 'mexican',
                 'fast food'],
                 cuisineRecs: 
+                // Here is where you'd put your restaurant recommendations to be read for each type of cuisine
+                // The order is important, of course:
                 [
                 'the best brunch is...',
                 'allow me to suggest fine dining options...',
@@ -264,6 +284,9 @@ const prompts = {
                 'The flavors of Mexico call to you...',
                 'In a hurry? RUN to Del Taco...'
                 ],
+                // Here's where we set up the types of bars and nightlife we have recommendations for.
+                // These correspond to the barTypes Slot Type values defined in the custom Slot Types 
+                // section of the Skill Builder:
                 barTypes: [
                 'patio',
                 'tiki',
@@ -271,20 +294,25 @@ const prompts = {
                 'gay',
                 'dive'
                 ],
+                // And then here are our recommendations based on types of bars:
                 barRecs: 
                 [
                 'Azul (also known as Alibi) has a great patio bar.',
                 'Great tiki bars include Tonga Hut and Bootlegger Tiki.',
                 'For fancy, old-school cocktails, try Melvyn\'s at the Ingleside Inn',
                 'Girl, let me tell you about the best gay bars...',
-                'Our favorite dive bar is also the closest bar to Elrod Villa. Toucan\'s is a must visit!'
+                'Our favorite dive bar is also the closest bar to ' + rentalName + '. Toucan\'s is a must visit!'
                 ],
+                // Finally, we have a third multi-turn type section for Local Attractions.
+                // Here are the attractionTypes as defined in the custom Slot Types 
+                // section of the Skill Builder:
                 attractionTypes: [
                 'museums',
                 'village fest',
                 'aerial tramway',
                 'walk of stars'
                 ],
+                // And here is the spoken text of the recommendations for each category:
                 attractionRecs: 
                 [
                 'Try the Palm Springs Art Museum or Palm Springs Air Museum.',
@@ -296,9 +324,14 @@ const prompts = {
 
 /* HELPER FUNCTIONS */
 
+// Select a random prompt:
 function randoPrompt(prompt) {
      return prompt[Math.floor(Math.random() * prompt.length)];
 }
+
+// In the things that involve multi-turn dialogs (like restaurant, bar and local attraction recommendations),
+// I used synonyms in the Skill Builder to allow users to be more natural in their responses. The following 
+// function resolves returned synonyms to their canonical slot values.
 
 function slotValue(slot, useId){
     let value = slot.value;
@@ -320,162 +353,238 @@ function slotValue(slot, useId){
 
 
 /* Intent Handlers */
+// Here are our intent handlers
 
 const handlers = {
+    // Do this upon skill launch:
     'LaunchRequest': function () {
-//        const speechOutput = 'Welcome to Elrod Villa...' + prompts.first[Math.floor(Math.random() * prompts.first.length)];
-        const speechOutput = 'Welcome to Elrod Villa...' + randoPrompt(prompts.first);
+        const speechOutput = 'Welcome to ' + rentalName + '! ' + randoPrompt(prompts.first);
         const reprompt = randoPrompt(prompts.first);
+        // You'll note that we use "ask" to keep the dialog open after our introduction and subsequent
+        // responses. This gives the user time to respond! After a few seconds, Alexa will chime in again with
+        // a reprompt (selected at random from our list defined above):
         this.emit(':ask', speechOutput, reprompt);
     },
+    // Handler for an intent about our property mananger - his name is Reed so there's an intent named after him. 
+    // Yours is probably different, of course.
     'ReedIntent': function () {
         const speechOutput = reedAnswer;
         const reprompt = randoPrompt(prompts.second);
         this.emit(':ask', speechOutput, reprompt);
     },
+    // For where's the trash type questions
     'TrashIntent': function () {
         const speechOutput = trashAnswer;
         const reprompt = randoPrompt(prompts.second);
         this.emit(':ask', speechOutput, reprompt);
-    },   
+    },
+    // For wifi / network / connectivity questions
     'WiFiIntent': function () {
         const speechOutput = wifiAnswer;
         const reprompt = randoPrompt(prompts.second);
         this.emit(':ask', speechOutput, reprompt);
     },
+    // For questions about Checking out
     'CheckoutIntent': function () {
         const speechOutput = checkoutAnswer;
         const reprompt = randoPrompt(prompts.second);
         this.emit(':ask', speechOutput, reprompt);
     },
+    // For questions about coffee, tea, etc.
     'CoffeeIntent': function () {
         const speechOutput = coffeeAnswer;
         const reprompt = randoPrompt(prompts.second);
         this.emit(':ask', speechOutput, reprompt);
     },
+    // For questions about contacting the owner, rather than the local property manager -- you'll note
+    // that over in the Skill Builder, this intent includes some sample utterances where I've included
+    // "OwnerName"... That must be replaced with the owner's name, of course, for this to work as expected
     'ContactInfoIntent': function () {
         const speechOutput = contactinfoAnswer;
         const reprompt = randoPrompt(prompts.second);
         this.emit(':ask', speechOutput, reprompt);
     },
+    // For questions about electronics / home theater stuff in general. Idea was to have it kind be
+    // a help thing to suggest specific topics like turning on the TV. Implmentation of that stuff is
+    // left as an exercise for the reader. ;)
     'ElectronicsIntent': function () {
         const speechOutput = electronicsAnswer;
         const reprompt = randoPrompt(prompts.second);
         this.emit(':ask', speechOutput, reprompt);
     },
+    // For questions about where the phone is located, is there a phone in the house, what's its number, etc.
     'PhoneIntent': function () {
         const speechOutput = phoneAnswer;
         const reprompt = randoPrompt(prompts.second);
         this.emit(':ask', speechOutput, reprompt);
     },
+    // For 'we have an emergecy' type utturances
     'EmergencyIntent': function () {
         const speechOutput = emergencyAnswer;
         const reprompt = randoPrompt(prompts.second);
         this.emit(':ask', speechOutput, reprompt);
     },
+    // For questions related to the BBQ grill
     'GrillingIntent': function () {
         const speechOutput = grillingAnswer;
         const reprompt = randoPrompt(prompts.second);
         this.emit(':ask', speechOutput, reprompt);
     },
+    // For questions related to smoking
     'AshtrayIntent': function () {
         const speechOutput = ashtrayAnswer;
         const reprompt = randoPrompt(prompts.second);
         this.emit(':ask', speechOutput, reprompt);
     },
+    // For questions about climate control, HVAC, etc.
     'ClimateControlIntent': function () {
         const speechOutput = climatecontrolAnswer;
         const reprompt = randoPrompt(prompts.second);
         this.emit(':ask', speechOutput, reprompt);
     },
+    // Our dishwasher is actually hard for some to find as it's one of those custom panel numbers. Yours may not be
     'DishwasherIntent': function () {
         const speechOutput = dishwasherAnswer;
         const reprompt = randoPrompt(prompts.second);
         this.emit(':ask', speechOutput, reprompt);
     },
+    // Same here -- microwave is kinda hidden:
     'MicrowaveIntent': function () {
         const speechOutput = microwaveAnswer;
         const reprompt = randoPrompt(prompts.second);
         this.emit(':ask', speechOutput, reprompt);
     },
+    // For questions about the gas fireplace
     'FireplaceIntent': function () {
         const speechOutput = fireplaceAnswer;
         const reprompt = randoPrompt(prompts.second);
         this.emit(':ask', speechOutput, reprompt);
     },
+    // Have a boo boo or need a bandage? Here's where to find first aid supplies
     'FirstAidIntent': function () {
         const speechOutput = firstAidAnswer;
         const reprompt = randoPrompt(prompts.second);
         this.emit(':ask', speechOutput, reprompt);
     },
+    // This is about ice/icemaker in our case
     'RefrigeratorIntent': function () {
         const speechOutput = refrigeratorAnswer;
         const reprompt = randoPrompt(prompts.second);
         this.emit(':ask', speechOutput, reprompt);
     },
+    // For questions about the laundry/washing
     'LaundryIntent': function () {
         const speechOutput = laundryAnswer;
         const reprompt = randoPrompt(prompts.second);
         this.emit(':ask', speechOutput, reprompt);
     },
+    // For questions about something broken, something needs fixing, maintenance schedule
     'MaintenanceIntent': function () {
         const speechOutput = maintenanceAnswer;
         const reprompt = randoPrompt(prompts.second);
         this.emit(':ask', speechOutput, reprompt);
     },
+    // For questions about history of the property. The intent is to build this out with further subtopics that
+    // could be asked about. Not as multi-turn, but you'll note that in the history answer definition above, 
+    // we talk about folks like 'sig edelstone' and 'arthur elrod'. You can easily imagine defining some 
+    // new intents over in the skill builder to handle utterances asking for more details about those folks!
     'HistoryIntent': function () {
         const speechOutput = historyAnswer;
         const reprompt = randoPrompt(prompts.second);
         this.emit(':ask', speechOutput, reprompt);
     }, 
+    // I don't know why anybody, in an emergency situation, would ask a damn chatbot about the hospital,
+    // but in the interest of being complete -- and being safe -- something like this should defnitiely be here!
     'HopitalIntent': function () {
         const speechOutput = hospitalAnswer;
         const reprompt = randoPrompt(prompts.second);
         this.emit(':ask', speechOutput, reprompt);
     }, 
+    // Here's an Easter Egg! Some of the prompt/reprompts mention a magic 8 ball. If the user says anything
+    // about that (take a look at the sample utterances for EightBallIntent over in the Skill Builder),
+    // we shake the 8 ball for them. You could use a similar technique to deliver a random fact about
+    // your property or locale. No need to get all fancy with having a whole "emitwithstate" thing, by the way,
+    // just define your utterances in such a way that you also have utterances for "do the magic 8 ball thing again",
+    // "give me another 8 ball", etc.
     'EightBallIntent': function () {
         const speechOutput = randoPrompt(prompts.playAlong) + randoPrompt(prompts.EBsays) + randoPrompt(prompts.magicEightBall);
         const reprompt = randoPrompt(prompts.second);
         this.emit(':ask', speechOutput, reprompt);
     },
+    // Here's a little chatbot trick. You'll note that when we drop into the skill, all Alexa says is
+    // "Welcome to [the Vacation Rental]... How can I help you?" or similar. While that's really 
+    // cool and conversational, it's entirely possible that the user might be a little confused, shy
+    // or taken aback. So, we've defined a TopicsIntent over in the Skill Builder to handle questions like, 
+    // "Well, what CAN you help me with?", "what sort of questions?", etc. 
+    // So here, we have Alexa read out a list of topics we want people to know
+    // that they can ask about. Another utterance defined there is "Main Menu" -- you know for smarty-pants users
+    // who just wanna be sure they are at the top level of a conversation.
     'TopicsIntent': function () {
         const speechOutput = 'You can ask me about topics including...' + prompts.topics;
         const reprompt = randoPrompt(prompts.second);
         this.emit(':ask', speechOutput, reprompt);
     },
+    // Here's an example of a jokey-joke response. I didn't define this up above as a constant.
+    // Just left it here as an example of how you can be totally lazy and define a one-off intent for some
+    // random utterance. 
     'VRBOIntent': function () {
-        const speechOutput = 'I can\'t say that I know much about it. But I heard that HomeAway and VRBO are doing away with open communication with guests before booking. I guess that makes it a more costly alternative to Airbnb or something. Good thing we built our own website, and stuff...';
+        const speechOutput = 'I can\'t say that I know much about it. But I heard that HomeAway and VRBO are doing away with open communication with guests before booking. I guess that makes it a more costly alternative to Airbnb or something. Good thing we built our own website and stuff...';
         const reprompt = randoPrompt(prompts.second);
         this.emit(':ask', speechOutput, reprompt);
     },
+    // Here we handle the multi-turn dialog for Restaurant Recommendations (this is like the other multi-turn
+    // ones for bars and local attractions that you'll find below).
     'RestaurantsIntent': function () {
-        // SLOTS ARE NOT FILLED - DELEGATE:        
+        // Here's where we determine if the user has requested a restaurant recommendation. It is possible
+        // that the user has naturally specified a restaurant type, but it's more likely that they've simply
+        // asked for a recommendation and we need Alexa to help them narrow down a recommendation by type.
+        // We do this by delegating the dialog to Alexa to fill in any unfilled required slots.
+
         if (this.event.request.dialogState == "STARTED" || this.event.request.dialogState == "IN_PROGRESS"){
-                this.emit(':delegate');
+        // If the dialog is in either of these states ^^^^^^^ the SLOTS ARE NOT FILLED - SO DELEGATE
+        // Note: At present I have no idea why we can't just issue an "emit.delegate", but this seems broken
+        // in some versions of the node.js SDK for Alexa, so I'm doing it this way, where we return a 
+        // Dialog.Delegate directive:
+            this.emit(':delegate');
         } else {
-                // SLOTS ARE FILLED - DELIVER THE INFO
-                // const desiredFood = this.event.request.intent.slots.FoodType.value.toLowerCase();
+                // Since we got here, the reqired SLOTS ARE FILLED - SO, DELIVER THE INFO:
+                // Note that in my example, I've used synonyms over in the Skills Builder
+                // So, to do the matching, we need to get the canonical value, rather than the
+                // utterance (which we could get as well). Let's get the word for what type of food
+                // the user has requested:
                 var   desiredFood = slotValue(this.event.request.intent.slots.FoodType).toLowerCase();
+                // Let's look up the index of that in our "cuisines" list:
                 const foodIndex = prompts.cuisines.indexOf(desiredFood);
+                // Set up the recommendation response and follow it up with a re-prompt utterance to keep
+                // the dialog open:
                 const speechOutput = prompts.cuisineRecs[foodIndex];
                 const reprompt = randoPrompt(prompts.second);
-            
+
+                // But wait... We need to handle one error case:
+                // It's entirely possible that the user has defied our attempts to narrow their choices
+                // and cleverly account for synonyms. In that case, what Alexa thinks the user uttered
+                // will be in the desiredFood variable. For example, the user might have asked for 
+                // "Armenian" or "shitty" food for which we don't currently have a recommendation.
+                // In this case, the foodIndex will come back as "-1", meaning it doesn't match our list of values.
+                // But we can still have some fun and let the user know:
+                
                 if (foodIndex == -1){
-                // user selected a food we do not know about - error out
-                const speechOutput = 'I\'m sorry, I can\'t recommend any places that serve ' + desiredFood + ' food. Ask me about restaurant recommendations again?';
+                // user selected a food we do not know about - error out with an apology:
+                const speechOutput = 'I\'m sorry, I can\'t recommend any places that serve ' + desiredFood + 'food. Ask me about restaurant recommendations again?';
 
                 this.emit(':ask', speechOutput, reprompt);
                 
                 } else {
-                // REPLY WITH INFO
+                // user selected a food we know about - REPLY WITH INFO
                  this.emit(':ask', speechOutput, reprompt);
             }
         }
     },
+    // As with Restaurants above, here's where we handle the multi-turn for bars and nightlife:
    'BarsIntent': function () {
         // SLOTS ARE NOT FILLED - DELEGATE:        
         if (this.event.request.dialogState == "STARTED" || this.event.request.dialogState == "IN_PROGRESS"){
-               this.emit(':delegate');
+            this.emit(':delegate');
         } else {
                 // SLOTS ARE FILLED - DELIVER THE INFO
                 // const desiredBar = this.event.request.intent.slots.BarType.value.toLowerCase();
@@ -485,7 +594,7 @@ const handlers = {
                 const reprompt = randoPrompt(prompts.second);
             
                 if (barIndex == -1){
-                // user selected a food we do not know about - error out
+                // user selected a bar type we do not know about - error out
                 const speechOutput = 'I\'m sorry, I can\'t recommend any ' + desiredBar + 'bars. Ask me about bar recommendations again?';
 
                 this.emit(':ask', speechOutput, reprompt);
@@ -496,10 +605,11 @@ const handlers = {
             }
         }
     },
+    // Here's where we handle the multi-turn for Local Attractions:
        'AttractionsIntent': function () {
         // SLOTS ARE NOT FILLED - DELEGATE:        
         if (this.event.request.dialogState == "STARTED" || this.event.request.dialogState == "IN_PROGRESS"){
-               this.emit(':delegate');
+            this.emit(':delegate');
         } else {
                 // SLOTS ARE FILLED - DELIVER THE INFO
                 // const desiredBar = this.event.request.intent.slots.LocalAttractions.value.toLowerCase();
@@ -509,7 +619,7 @@ const handlers = {
                 const reprompt = randoPrompt(prompts.second);
             
                 if (attractionIndex == -1){
-                // user selected a food we do not know about - error out
+                // user selected an attraction type we do not know about - error out
                 const speechOutput = 'I\'m sorry, I can\'t recommend any ' + desiredAttraction + ' Ask me about local attractions again?';
 
                 this.emit(':ask', speechOutput, reprompt);
@@ -520,24 +630,32 @@ const handlers = {
             }
         }
     },
+    // Handle the built-in help intent similar to how we handle a request for topics
     'AMAZON.HelpIntent': function () {
         const speechOutput = 'You can ask me about topics including...' + prompts.topics;
         const reprompt = randoPrompt(prompts.second);
         this.emit(':ask', speechOutput, reprompt);
     },
+    // Handle built-in Cancel intent
     'AMAZON.CancelIntent': function () {
         const speechOutput = 'Catch ya later!';
         this.emit(':tell', speechOutput);
     },
+    // Handle built-in Stop intent
     'AMAZON.StopIntent': function () {
         const speechOutput = 'Catch ya later!';
         this.emit(':tell', speechOutput);
     },
+    // The rules around handling unhandled intents are weird in Alexa-land. 
+    // It's entirely possible you may never get this intent triggered.
+    // But it's here just in case...
     'Unhandled': function() {
         this.emit(':ask', 'Sorry, I\'m not sure I understood you. Ask again or ask a different question?', 'Sorry, I\'m not sure I understood you. Ask again or ask a different question?');
     }
 };
 
+
+// Register the handlers and junk as one would usually do!
 exports.handler = function (event, context, callback) {
     const alexa = Alexa.handler(event, context, callback);
     alexa.APP_ID = APP_ID;
@@ -546,3 +664,4 @@ exports.handler = function (event, context, callback) {
     alexa.registerHandlers(handlers);
     alexa.execute();
 };
+// That's all folks!
