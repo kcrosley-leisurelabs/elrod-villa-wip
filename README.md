@@ -22,3 +22,5 @@ Now you should be able to launch and test the skill. Tell Alexa, "open vacation 
 While it's designed to be used as a chat, it can also be invoked with a question. For example, "Alexa, ask Vacation Rental to recommend a mexican restaurant."
 
 I'm providing all of this here because having an example like this would have helped me greatly when I was just starting out with developing a simple "answer a bunch of FAQ type questions" skill!
+
+This work was inspired by Dana Young's excellent "Vacation Rental Virtual Concierge" skill (see http://www.vacationrentalvirtualconcierge.com), which is an excellent tool for those who don't want to go whole hog and create their own custom skill. His service is fantastic, but I wanted to create something a little more custom.
