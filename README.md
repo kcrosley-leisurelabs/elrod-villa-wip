@@ -24,3 +24,8 @@ While it's designed to be used as a chat, it can also be invoked with a question
 I'm providing all of this here because having an example like this would have helped me greatly when I was just starting out with developing a simple "answer a bunch of FAQ type questions" skill!
 
 This work was inspired by Dana Young's excellent "Vacation Rental Virtual Concierge" skill (see http://www.vacationrentalvirtualconcierge.com), which is an excellent tool for those who don't want to go whole hog and create their own custom skill. His service is fantastic, but I wanted to create something a little more custom.
+
+I'm sure there are better coders who might take issue with the way I've implemented intent handling here or who would have terrific suggestions about how to improve my code. Feel free to comment, ask questions or provide improvements by opening an issue!
+
+Best Regards,
+Keith
