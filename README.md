@@ -27,5 +27,7 @@ This work was inspired by Dana Young's excellent "Vacation Rental Virtual Concie
 
 I'm sure there are better coders who might take issue with the way I've implemented intent handling here or who would have terrific suggestions about how to improve my code. Feel free to comment, ask questions or provide improvements by opening an issue!
 
+If you're interested in vacation rental technology topics in general, you might enjoy my article on how I built our rental website as well. See http://www.evillapalmsprings.com/palm-springs-vacation-rental-website-article.html. 
+
 Best Regards,
 Keith
