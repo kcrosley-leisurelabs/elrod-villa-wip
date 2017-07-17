@@ -1,7 +1,7 @@
 # elrod-villa-wip
 Sample Vacation Rental Info/Concierge Chatbot for Alexa
 
-This is a sample Alexa skill that implments a chatbot suitable for deployment in a vacation rental. It is customized to my own vacation rental, Elrod Villa (http://www.evillapalmsprings.com), but could be used as a model for similar custom skills. Other types of skills that this example may be helpful for include things like "Alexa FAQ skills", "I just want to make Alexa say a bunch of weird stuff skills", "Alexa chatbot skills", etc.  
+This is a sample Alexa skill that implements a chatbot suitable for deployment in a vacation rental. It is customized to my own vacation rental, Elrod Villa (http://www.evillapalmsprings.com), but could be used as a model for similar custom skills. Other types of skills that this example may be helpful for include things like "Alexa FAQ skills", "I just want to make Alexa say a bunch of weird stuff skills", "Alexa chatbot skills", etc.  
 
 All Alexa spoken content is currently contained in the index file (defined in constants at the very beginning), but should probably be implemented in a different fashion (fetched from a remote location, perhaps?) to facilitate easier updating. (This skill does not fetch any content from external web locations at present.)
 
